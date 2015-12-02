@@ -15,9 +15,9 @@ def genSummary(path, i, pathofSummary):
          continue
       elif c.endswith('.md'):
          if c == 'README.md':
-            f.write(' ' * 3 * (i - 1) + '*' + '[' + os.path.split(p)[-1] + ']' + '(' + relativeDir(p, i - 1, c)+ ')\n')
+            f.write(' ' * 3 * (i - 1) + '* ' + '[' + os.path.split(p)[-1] + ']' + '(' + relativeDir(p, i - 1, c)+ ')\n')
          else:
-            f.write(' ' * 3 * i + '*' + '[' + c[0:-3] + ']' + '(' + relativeDir(p, i - 1, c) + ')\n')
+            f.write(' ' * 3 * i + '* ' + '[' + c[0:-3] + ']' + '(' + relativeDir(p, i - 1, c) + ')\n')
       else:
          p = p + '/' + c
          genSummary(p, i, pathofSummary)
