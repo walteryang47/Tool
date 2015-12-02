@@ -1,12 +1,12 @@
 # _*_ coding: utf-8 _*_
 
-import os 
+import os
 
 def genSummary(path, i, pathofSummary):
    i += 1
    contains = os.listdir(path)
    if 'README.md' not in contains:
-      newFile = file(path + '/' + 'README.md', 'w')
+      newFile = file((path + '/' + 'README.md'), 'w')
       newFile.close()
    putFiletoHead(contains)
    for c in contains:
@@ -48,8 +48,13 @@ def relativeDir(path, i, file):
 # 判断一个文件是否是目录：使用 os.path.isdir(path)
 #path = '/home/helen/workspace/EayunOS-testcase/Function_Test/WebAdmin'
 
-path = '/home/helen/workspace/EayunOS-testcase/Function_Test/WebAdmin'
-pathofSummary = '/tmp/SUMMARY.md'
-f = open(pathofSummary, 'a')
-genSummary(path, 0, pathofSummary)
-f.close()
+def main():
+   path = os.getcwd()
+   pathofSummary = os.getcwd() + '/' + 'SUMMARY.md'
+   global f
+   f = open(pathofSummary, 'a')
+   genSummary(path, 0, pathofSummary)
+   f.close()
+
+if __name__ == '__main__':
+   main()
