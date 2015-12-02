@@ -8,10 +8,10 @@ def genSummary(path, i, pathofSummary):
    if 'README.md' not in contains:
       newFile = file((path + '/' + 'README.md'), 'w')
       newFile.close()
-   putFiletoHead(contains)
+   contains = putFiletoHead(contains, path)
    for c in contains:
       p = path
-      if ((not os.path.isdir(p + '/' + c)) and (not c.endswith('.md'))) or c == 'SUMMARY.md':
+      if ((not os.path.isdir(p + '/' + c)) and (not c.endswith('.md'))) or c == 'SUMMARY.md' or c == '_book' or c == '.git':
          continue
       elif c.endswith('.md'):
          if c == 'README.md':
@@ -22,20 +22,28 @@ def genSummary(path, i, pathofSummary):
          p = p + '/' + c
          genSummary(p, i, pathofSummary)
 
-# 将文件放到 List 的最前面
+# 将文件放到 List 的最前面，README.md 放在第一个位置
 
-def putFiletoHead(dirList):
+def putFiletoHead(dirList, path):
+#   print '-----------------------' + path
    dirList.sort()
-   j = 0
-   for d in dirList:
-      if d.endswith('.md'):
-         dIndex = dirList.index(d)
-         if d ==  'README.md':
-            dirList[0], dirList[dIndex] = d, dirList[0]
-            j += 1
-            break
-         dirList[j], dirList[dIndex] = d, dirList[j]
-         j += 1
+   # orderList(dirList, 'README.md', 0)
+   # newDirList = dirList[1:]
+   fileList = []
+   nonfileList = []
+   for content in dirList:
+      if os.path.isdir(path + '/' + content):
+         nonfileList.append(content)
+      else:
+         fileList.append(content)
+#   print '~~~~~~~~~~~~~~~~~~~~~'
+#   print fileList
+#   print '==================='
+   orderList(fileList, 'README.md', 0)
+   dirList = fileList + nonfileList
+   return dirList
+
+
    
 # 取文件的相对路径
 def relativeDir(path, i, file):
@@ -47,6 +55,20 @@ def relativeDir(path, i, file):
 
 # 判断一个文件是否是目录：使用 os.path.isdir(path)
 #path = '/home/helen/workspace/EayunOS-testcase/Function_Test/WebAdmin'
+# python 冒泡排序
+def orderList(dirList, d, n):
+   """
+   d 是要交换的那个 value
+   n 是目的索引
+   """
+   l = len(dirList)
+   dIndex = dirList.index(d)
+   i = dIndex
+   while i > n:
+      dirList[i], dirList[i - 1] = dirList[i - 1], dirList[i]
+      i -= 1
+
+
 
 def main():
    path = os.getcwd()
