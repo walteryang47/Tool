@@ -73,6 +73,8 @@ def orderList(dirList, d, n):
 def main():
    path = os.getcwd()
    pathofSummary = os.getcwd() + '/' + 'SUMMARY.md'
+#   path = '/home/helen/workspace/Book/Book'
+#   pathofSummary = '/home/helen/workspace/Book/Book/SUMMARY.md'
    global f
    f = open(pathofSummary, 'a')
    genSummary(path, 0, pathofSummary)
