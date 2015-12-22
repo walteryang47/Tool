@@ -1,4 +1,4 @@
-from TurtleWorld import *
+from swampy.TurtleWorld import *
 from math import *
 
 def n_arc(t, R, r):

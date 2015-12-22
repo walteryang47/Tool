@@ -1,6 +1,6 @@
 # _*_ coding:utf-8 _*_
 
-from TurtleWorld import *
+from swampy.TurtleWorld import *
 from math import *
 from ellipse import *
 from u import *
